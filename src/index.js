@@ -1,4 +1,4 @@
-import colors from 'nice-color-palettes' assert { type: 'json' }
+import colors from './palettes/nice-color-100.js'
 import createGrid from './generator.js'
 import random from './random.js'
 

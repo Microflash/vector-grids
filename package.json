@@ -21,7 +21,6 @@
 	"dependencies": {
 		"@georgedoescode/generative-utils": "^1.0.38",
 		"@svgdotjs/svg.js": "^3.1.2",
-		"nice-color-palettes": "^3.0.0",
 		"svgdom": "^0.1.10",
 		"svgo": "^2.8.0"
 	}

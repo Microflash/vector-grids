@@ -1,4 +1,5 @@
 import { createSVGWindow } from 'svgdom'
+import { optimize } from 'svgo'
 import { SVG, registerWindow } from '@svgdotjs/svg.js'
 import generativeUtils from '@georgedoescode/generative-utils'
 import fetch from 'node-fetch'
@@ -259,7 +260,7 @@ async function createGrid(colors) {
 	}
 
 	generateBigBlock(canvas, squareSize, palette, numRows, numCols)
-	return canvas.svg()
+	return optimize(canvas.svg()).data
 }
 
 export default async function generate() {

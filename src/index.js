@@ -4,35 +4,6 @@ import generativeUtils from '@georgedoescode/generative-utils'
 import fetch from 'node-fetch'
 
 const { random } = generativeUtils
-const selectedCharacters = [
-	'A',
-	'B',
-	'C',
-	'D',
-	'E',
-	'F',
-	'G',
-	'H',
-	'I',
-	'J',
-	'K',
-	'L',
-	'M',
-	'N',
-	// O removed for looking like a circle
-	'P',
-	// Q removed for an annoying descender
-	'R',
-	'S',
-	'T',
-	'U',
-	'V',
-	'W',
-	'X',
-	'Y',
-	'Z',
-	'&'
-]
 
 function drawCircle(canvas, squareSize, x, y, foreground, background) {
 	// create group element
@@ -174,29 +145,6 @@ function drawDiagonalSquare(canvas, squareSize, x, y, foreground, background) {
 	polygon.fill(foreground)
 }
 
-function drawLetterBlock(canvas, squareSize, x, y, foreground, background) {
-	const group = canvas.group()
-	const mask = canvas.rect(squareSize, squareSize).fill('#fff').move(x, y)
-
-	// draw background
-	group.rect(squareSize, squareSize).fill(background).move(x, y)
-
-	// draw foreground
-	const character = random(selectedCharacters)
-	const text = group.plain(character)
-	text.font({
-		family: 'Inter',
-		size: squareSize * 1.2,
-		weight: 800,
-		anchor: 'middle',
-		fill: foreground,
-		leading: 1
-	})
-	text.center(x + squareSize / 2, y + squareSize / 2)
-	text.rotate(random([0, 90, 180, 270]))
-	group.maskWith(mask)
-}
-
 function drawHalfSquare(canvas, squareSize, x, y, foreground, background) {
 	const group = canvas.group()
 
@@ -228,8 +176,7 @@ function generateSmallBlock(canvas, squareSize, colorPalette, i, j) {
 		drawDiagonalSquare,
 		drawCircle,
 		drawOppositeCircles,
-		drawQuarterCircle,
-		drawLetterBlock
+		drawQuarterCircle
 	]
 
 	const blockStyle = random(blockStyleOptions)
@@ -248,8 +195,7 @@ function generateBigBlock(canvas, squareSize, colorPalette, numRows, numCols) {
 		drawDiagonalSquare,
 		drawCircle,
 		drawQuarterCircle,
-		drawOppositeCircles,
-		drawLetterBlock
+		drawOppositeCircles
 	]
 
 	let prevSquareSize = squareSize
@@ -320,5 +266,3 @@ export default async function generate() {
 	const colors = await fetch('https://unpkg.com/nice-color-palettes@3.0.0/100.json').then((response) => response.json())
 	return createGrid(colors)
 }
-
-console.log(await generate())

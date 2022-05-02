@@ -1,8 +1,8 @@
+import generativeUtils from '@georgedoescode/generative-utils'
+import { registerWindow, SVG } from '@svgdotjs/svg.js'
+import colors from 'nice-color-palettes' assert { type: 'json' }
 import { createSVGWindow } from 'svgdom'
 import { optimize } from 'svgo'
-import { SVG, registerWindow } from '@svgdotjs/svg.js'
-import generativeUtils from '@georgedoescode/generative-utils'
-import fetch from 'node-fetch'
 
 const { random } = generativeUtils
 
@@ -264,6 +264,5 @@ async function createGrid(colors) {
 }
 
 export default async function generate() {
-	const colors = await fetch('https://unpkg.com/nice-color-palettes@3.0.0/100.json').then((response) => response.json())
 	return createGrid(colors)
 }

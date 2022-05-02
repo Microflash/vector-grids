@@ -83,13 +83,13 @@ function createCanvas() {
 	return SVG(document.documentElement)
 }
 
-export default async function createGrid(colors) {
+export default async function createGrid(options = defaultOptions) {
 	// select a random palette
-	const palette = random(colors)
+	const palette = random(options.colors)
 
-	const squareSize = 100
-	const numRows = random(4, 8, true)
-	const numCols = random(4, 8, true)
+	const squareSize = options.squareSize
+	const numRows = options.numRows
+	const numCols = options.numCols
 
 	const canvas = createCanvas()
 		.size('100%', '100%')
